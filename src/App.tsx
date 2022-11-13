@@ -8,13 +8,6 @@ import Frame from './components/Frame';
 import DashboardPage from './pages/dashboard';
 import Error404Page from './pages/authentication/404';
 import Error500Page from './pages/authentication/500';
-import SignInPage from './pages/authentication/sign-in';
-import SignUpPage from './pages/authentication/sign-up';
-import MembersPage from './pages/tables/members';
-import VirtualizedTablePage from './pages/tables/virtualized';
-import FormBasicPage from './pages/forms/basic';
-import FormWizardPage from './pages/forms/wizard';
-import CalendarPage from './pages/calendar';
 import { appNavs } from './config';
 
 const App = () => {
@@ -25,15 +18,8 @@ const App = () => {
           <Route path="/" element={<Frame navs={appNavs} />}>
             <Route index element={<DashboardPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="table-members" element={<MembersPage />} />
-            <Route path="table-virtualized" element={<VirtualizedTablePage />} />
             <Route path="error-404" element={<Error404Page />} />
             <Route path="error-500" element={<Error500Page />} />
-            <Route path="sign-in" element={<SignInPage />} />
-            <Route path="sign-up" element={<SignUpPage />} />
-            <Route path="form-basic" element={<FormBasicPage />} />
-            <Route path="form-wizard" element={<FormWizardPage />} />
-            <Route path="calendar" element={<CalendarPage />} />
           </Route>
           <Route path="*" element={<Error404Page />} />
         </Routes>
