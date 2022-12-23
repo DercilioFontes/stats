@@ -5,7 +5,7 @@ import Copyright from '@/components/Copyright';
 
 const Page = () => {
   return (
-    <Panel header={<h3 className="title">Dashboard</h3>}>
+    <Panel header={<h3 className="title">Histogram</h3>}>
       <Dashboard />
       <Copyright />
     </Panel>

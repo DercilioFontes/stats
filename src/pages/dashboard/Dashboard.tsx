@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Panel, ButtonGroup, Button } from 'rsuite';
-import * as images from '../../images/charts';
 import BarChart from './BarChart';
 import PieChart from './PieChart';
 import DataTable from './DataTable';
@@ -35,23 +34,40 @@ const Dashboard = () => {
       <Row gutter={30} className="dashboard-header">
         <Col xs={8}>
           <Panel className="trend-box bg-gradient-red">
-            <img className="chart-img" src={images.PVIcon} />
-            <div className="title">Page Views </div>
-            <div className="value">281,358</div>
+            <div className="title">
+              A <strong>histogram</strong> is a bar graph showing the number of observations in each
+              class as the height of each bar.
+            </div>
           </Panel>
         </Col>
         <Col xs={8}>
           <Panel className="trend-box bg-gradient-green">
-            <img className="chart-img" src={images.VVICon} />
-            <div className="title">Visits </div>
-            <div className="value">251,901</div>
+            <div className="title">
+              <p>
+                Organizing and presenting data sets can take three main forms: frequency
+                distributions, graphs, and stem and leaf designs.
+              </p>
+              <p>
+                The intervals in the frequency distribution are known as classes, and the number of
+                observations in each class is known as frequency.
+              </p>
+            </div>
           </Panel>
         </Col>
         <Col xs={8}>
           <Panel className="trend-box bg-gradient-blue">
-            <img className="chart-img" src={images.UVIcon} />
-            <div className="title">Unique Visitors</div>
-            <div className="value">25,135</div>
+            <div className="title">
+              <p>
+                A <strong>frequency distribution</strong> is a table with two columns: One column
+                has the classes for the variable of interest and the second column has the frequency
+                in each class.
+              </p>
+              <p>
+                <strong>Relative frequency distributions</strong> display the percentage of
+                observations in each class relative to the total number of observations. The
+                percentages are called relative frequencies.
+              </p>
+            </div>
           </Panel>
         </Col>
       </Row>
@@ -59,7 +75,7 @@ const Dashboard = () => {
       <Row gutter={30}>
         <Col xs={16}>
           <BarChart
-            title="Traffic Summary"
+            title="Data"
             actions={
               <ButtonGroup>
                 <Button active>Day</Button>
@@ -112,7 +128,7 @@ const Dashboard = () => {
         </Col>
         <Col xs={8}>
           <PieChart
-            title="Traffic Sources"
+            title="Chart"
             data={[112332, 123221, 432334, 342334, 133432]}
             type="donut"
             labels={['Direct', 'Internal', 'Referrals', 'Search Engines', 'Other']}
