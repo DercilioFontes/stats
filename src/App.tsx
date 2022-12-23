@@ -17,7 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Frame navs={appNavs} />}>
             <Route index element={<DashboardPage />} />
-            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="histogram" element={<DashboardPage />} />
             <Route path="error-404" element={<Error404Page />} />
             <Route path="error-500" element={<Error500Page />} />
           </Route>
