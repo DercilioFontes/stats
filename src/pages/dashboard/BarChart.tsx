@@ -27,25 +27,13 @@ interface BarChartProps {
   labels?: string[];
 }
 
-const defaultOptions = {
+const defaultOptions: ApexCharts.ApexOptions = {
   chart: {
     fontFamily: 'inherit',
     parentHeightOffset: 0,
     toolbar: {
-      show: false
-    },
-    animations: {
-      enabled: false
-    },
-    stacked: true
-  },
-  plotOptions: {
-    bar: {
-      columnWidth: '50%'
+      offsetY: -40
     }
-  },
-  dataLabels: {
-    enabled: false
   },
   fill: {
     opacity: 1
