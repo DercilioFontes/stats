@@ -65,12 +65,13 @@ module.exports = {
   },
   plugins: [
     new HtmlwebpackPlugin({
-      title: 'Admin Dashboard Template',
+      title: 'Stats Calculators',
       filename: 'index.html',
       template: './src/index.html',
       inject: true,
       hash: true,
-      path: './'
+      path: './',
+      favicon: 'src/images/charts/statistics-svgrepo-com.svg'
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
