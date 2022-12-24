@@ -70,8 +70,7 @@ const defaultOptions = {
     },
     axisBorder: {
       show: false
-    },
-    type: 'datetime'
+    }
   },
   yaxis: {
     labels: {
@@ -95,7 +94,7 @@ const BarChart = ({ title, actions, data, type, labels, options }: BarChartProps
     }
   >
     <Chart
-      series={data}
+      series={[data]}
       type={type}
       height={284}
       options={Object.assign({}, defaultOptions, options, { labels })}
