@@ -32,7 +32,8 @@ const defaultOptions: ApexCharts.ApexOptions = {
     fontFamily: 'inherit',
     parentHeightOffset: 0,
     toolbar: {
-      offsetY: -40
+      offsetY: -40,
+      offsetX: 10
     }
   },
   fill: {

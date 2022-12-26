@@ -114,9 +114,7 @@ const Dashboard = () => {
             <Col>
               <Form layout="inline">
                 <Form.Group controlId="textarea">
-                  <Form.ControlLabel>
-                    Classes <br /> (intervals)
-                  </Form.ControlLabel>
+                  <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
                   <Form.Control
                     rows={classes.length}
                     name="textarea"
@@ -125,9 +123,7 @@ const Dashboard = () => {
                   />
                 </Form.Group>
                 <Form.Group controlId="textarea">
-                  <Form.ControlLabel>
-                    Observations <br /> (values)
-                  </Form.ControlLabel>
+                  <Form.ControlLabel>Observations (values)</Form.ControlLabel>
                   <Form.Control
                     rows={classes.length}
                     name="textarea"
@@ -146,7 +142,12 @@ const Dashboard = () => {
           </Panel>
         </Col>
         <Col xs={8}>
-          <BarChart title="Chart" data={dataFromInput} type="bar" labels={dataFromInput.labels} />
+          <BarChart
+            title="Histogram"
+            data={dataFromInput}
+            type="bar"
+            labels={dataFromInput.labels}
+          />
         </Col>
       </Row>
       <Row gutter={30}>
@@ -155,10 +156,10 @@ const Dashboard = () => {
         </Col>
         <Col xs={8}>
           <PieChart
-            title="Browsers"
-            data={[10000, 3000, 2000, 1000, 900]}
+            title="Pie Chart"
+            data={dataFromInput.data}
             type="pie"
-            labels={['Chrome', 'Edge', 'Firefox', 'Safari', 'Other']}
+            labels={dataFromInput.labels}
           />
         </Col>
       </Row>

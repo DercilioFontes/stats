@@ -26,9 +26,15 @@ interface PieChartProps {
   labels?: string[];
 }
 
-const defaultOptions = {
-  dataLabels: {
-    enabled: false
+const defaultOptions: ApexCharts.ApexOptions = {
+  chart: {
+    fontFamily: 'inherit',
+    parentHeightOffset: 0,
+    toolbar: {
+      show: true,
+      offsetY: -40,
+      offsetX: -10,
+    }
   },
   plotOptions: {
     pie: {
@@ -37,15 +43,11 @@ const defaultOptions = {
         size: '75%'
       },
       offsetY: 0
-    },
-    stroke: {
-      colors: undefined
     }
   },
   colors: ['#5f71e4', '#2dce88', '#fa6340', '#f5365d', '#13cdef'],
   legend: {
-    position: 'bottom',
-    offsetY: 0
+    position: 'right'
   }
 };
 
