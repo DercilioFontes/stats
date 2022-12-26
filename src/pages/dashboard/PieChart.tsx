@@ -33,7 +33,7 @@ const defaultOptions: ApexCharts.ApexOptions = {
     toolbar: {
       show: true,
       offsetY: -40,
-      offsetX: -10,
+      offsetX: -10
     }
   },
   plotOptions: {
@@ -45,7 +45,22 @@ const defaultOptions: ApexCharts.ApexOptions = {
       offsetY: 0
     }
   },
-  colors: ['#5f71e4', '#2dce88', '#fa6340', '#f5365d', '#13cdef'],
+  colors: [
+    '#ea5545',
+    '#f46a9b',
+    '#ef9b20',
+    '#edbf33',
+    '#ede15b',
+    '#bdcf32',
+    '#87bc45',
+    '#27aeef',
+    '#b33dc6',
+    '#5f71e4',
+    '#2dce88',
+    '#fa6340',
+    '#f5365d',
+    '#13cdef'
+  ],
   legend: {
     position: 'right'
   }

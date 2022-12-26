@@ -4,6 +4,13 @@ import PieChart from './PieChart';
 import DataTable, { TableData } from './DataTable';
 import BarChart from './BarChart';
 
+type ChartData = {
+  labels: string[];
+  data: number[];
+  cumulativeFrequencies: number[];
+  sum: number;
+};
+
 const classes = [
   '0 - 10',
   '11 - 20',
@@ -18,7 +25,9 @@ const classes = [
 ];
 const observations = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
 
-const getData = (classes: string[], observations: number[]) => {
+const getChartData = (classesStr: string, observationsStr: string): ChartData => {
+  const classes = classesStr.split('\n');
+  const observations = observationsStr.split('\n').map(Number);
   // Map of classe => [min, max, count]
   const mapResult = new Map(classes.map(c => [c, [...c.split('-').map(Number), 0]]));
 
@@ -47,24 +56,35 @@ const getData = (classes: string[], observations: number[]) => {
   return { labels, data, cumulativeFrequencies, sum };
 };
 
-const dataFromInput = getData(classes, observations);
-
-const tableData = dataFromInput.labels.map<TableData>((label, i) => {
-  const frequency = dataFromInput.data[i];
-  const relativeFrequency = Number(((frequency / dataFromInput.sum) * 100).toFixed(2));
-  return {
-    label,
-    frequency,
-    relativeFrequency,
-    cumulativeFrequency: dataFromInput.cumulativeFrequencies[i]
-  };
-});
+const getTableData = (chartData: ChartData) => {
+  return chartData.labels.map<TableData>((label, i) => {
+    const frequency = chartData.data[i];
+    const relativeFrequency = Number(((frequency / chartData.sum) * 100).toFixed(2));
+    return {
+      label,
+      frequency,
+      relativeFrequency,
+      cumulativeFrequency: chartData.cumulativeFrequencies[i]
+    };
+  });
+};
 
 const Textarea = React.forwardRef<HTMLTextAreaElement>((props, ref) => (
   <Input {...props} as="textarea" ref={ref} />
 ));
 
+const initFormValue = {
+  classes: classes.join('\n'),
+  observations: observations.join('\n')
+};
+
 const Dashboard = () => {
+  const [formValue, setFormValue] = React.useState<Record<string, string>>(initFormValue);
+  const [chartData, setChartData] = React.useState<ChartData>(
+    getChartData(initFormValue.classes, initFormValue.observations)
+  );
+  const [tableData, setTableData] = React.useState(getTableData(chartData));
+
   return (
     <>
       <Row gutter={30} className="dashboard-header">
@@ -112,29 +132,43 @@ const Dashboard = () => {
         <Col xs={16}>
           <Panel className="card" header={<Stack justifyContent="space-between">Data</Stack>}>
             <Col>
-              <Form layout="inline">
+              <Form
+                layout="inline"
+                formValue={formValue}
+                onChange={formValue => setFormValue(formValue)}
+              >
                 <Form.Group controlId="textarea">
                   <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
-                  <Form.Control
-                    rows={classes.length}
-                    name="textarea"
-                    accepter={Textarea}
-                    defaultValue={classes.join('\n')}
-                  />
+                  <Form.Control rows={classes.length} name="classes" accepter={Textarea} />
                 </Form.Group>
                 <Form.Group controlId="textarea">
                   <Form.ControlLabel>Observations (values)</Form.ControlLabel>
-                  <Form.Control
-                    rows={classes.length}
-                    name="textarea"
-                    accepter={Textarea}
-                    defaultValue={observations.join('\n')}
-                  />
+                  <Form.Control rows={classes.length} name="observations" accepter={Textarea} />
                 </Form.Group>
                 <Form.Group>
                   <ButtonToolbar>
-                    <Button appearance="primary">Submit</Button>
-                    <Button appearance="default">Cancel</Button>
+                    <Button
+                      appearance="default"
+                      onClick={() => setFormValue({ classes: '', observations: '' })}
+                    >
+                      Clear
+                    </Button>
+                    <Button appearance="default" onClick={() => setFormValue(initFormValue)}>
+                      Reset
+                    </Button>
+                    <Button
+                      appearance="primary"
+                      onClick={() => {
+                        const newChartData = getChartData(
+                          formValue.classes,
+                          formValue.observations
+                        );
+                        setChartData(newChartData);
+                        setTableData(getTableData(newChartData));
+                      }}
+                    >
+                      Submit
+                    </Button>
                   </ButtonToolbar>
                 </Form.Group>
               </Form>
@@ -142,12 +176,7 @@ const Dashboard = () => {
           </Panel>
         </Col>
         <Col xs={8}>
-          <BarChart
-            title="Histogram"
-            data={dataFromInput}
-            type="bar"
-            labels={dataFromInput.labels}
-          />
+          <BarChart title="Histogram" data={chartData} type="bar" labels={chartData.labels} />
         </Col>
       </Row>
       <Row gutter={30}>
@@ -155,12 +184,7 @@ const Dashboard = () => {
           <DataTable data={tableData} />
         </Col>
         <Col xs={8}>
-          <PieChart
-            title="Pie Chart"
-            data={dataFromInput.data}
-            type="pie"
-            labels={dataFromInput.labels}
-          />
+          <PieChart title="Pie Chart" data={chartData.data} type="pie" labels={chartData.labels} />
         </Col>
       </Row>
     </>
