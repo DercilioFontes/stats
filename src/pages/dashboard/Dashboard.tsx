@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Panel, Stack, Form, ButtonToolbar, Button, Input } from 'rsuite';
 import PieChart from './PieChart';
-import DataTable from './DataTable';
+import DataTable, { TableData } from './DataTable';
 import BarChart from './BarChart';
 
 const classes = [
@@ -16,15 +16,16 @@ const classes = [
   '81 - 90',
   '91 - 100'
 ];
-const frequencies = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
+const observations = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
 
-const getData = (classes: string[], frequencies: number[]) => {
+const getData = (classes: string[], observations: number[]) => {
+  // Map of classe => [min, max, count]
   const mapResult = new Map(classes.map(c => [c, [...c.split('-').map(Number), 0]]));
 
-  for (const f of frequencies) {
+  for (const o of observations) {
     for (const values of mapResult.values()) {
       const [min, max] = values;
-      if (f >= min && f <= max) {
+      if (o >= min && o <= max) {
         values[2] += 1;
       }
     }
@@ -32,18 +33,36 @@ const getData = (classes: string[], frequencies: number[]) => {
 
   const labels: string[] = [];
   const data: number[] = [];
+  const cumulativeFrequencies: number[] = [];
+  let sum = 0;
 
   for (const [key, value] of mapResult.entries()) {
     labels.push(key);
-    data.push(value[2]);
+    const count = value[2];
+    data.push(count);
+    sum += count;
+    cumulativeFrequencies.push(sum);
   }
 
-  return { labels, data };
+  return { labels, data, cumulativeFrequencies, sum };
 };
 
-const data = getData(classes, frequencies);
+const dataFromInput = getData(classes, observations);
 
-const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
+const tableData = dataFromInput.labels.map<TableData>((label, i) => {
+  const frequency = dataFromInput.data[i];
+  const relativeFrequency = Number(((frequency / dataFromInput.sum) * 100).toFixed(2));
+  return {
+    label,
+    frequency,
+    relativeFrequency,
+    cumulativeFrequency: dataFromInput.cumulativeFrequencies[i]
+  };
+});
+
+const Textarea = React.forwardRef<HTMLTextAreaElement>((props, ref) => (
+  <Input {...props} as="textarea" ref={ref} />
+));
 
 const Dashboard = () => {
   return (
@@ -95,7 +114,9 @@ const Dashboard = () => {
             <Col>
               <Form layout="inline">
                 <Form.Group controlId="textarea">
-                  <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
+                  <Form.ControlLabel>
+                    Classes <br /> (intervals)
+                  </Form.ControlLabel>
                   <Form.Control
                     rows={classes.length}
                     name="textarea"
@@ -104,12 +125,14 @@ const Dashboard = () => {
                   />
                 </Form.Group>
                 <Form.Group controlId="textarea">
-                  <Form.ControlLabel>Frenquency</Form.ControlLabel>
+                  <Form.ControlLabel>
+                    Observations <br /> (values)
+                  </Form.ControlLabel>
                   <Form.Control
                     rows={classes.length}
                     name="textarea"
                     accepter={Textarea}
-                    defaultValue={frequencies.join('\n')}
+                    defaultValue={observations.join('\n')}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -123,12 +146,12 @@ const Dashboard = () => {
           </Panel>
         </Col>
         <Col xs={8}>
-          <BarChart title="Chart" data={data} type="bar" labels={data.labels} />
+          <BarChart title="Chart" data={dataFromInput} type="bar" labels={dataFromInput.labels} />
         </Col>
       </Row>
       <Row gutter={30}>
         <Col xs={16}>
-          <DataTable />
+          <DataTable data={tableData} />
         </Col>
         <Col xs={8}>
           <PieChart
