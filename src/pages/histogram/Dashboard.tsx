@@ -195,17 +195,21 @@ const HistogramDashboard = () => {
                         if (!formValue.classes || !formValue.observations) {
                           toaster.push(
                             <Notification type="warning" header="warning">
-                              No data!
-                            </Notification>
+                              <p>
+                                No data! Please, add the classes intervals and observation values.
+                              </p>
+                            </Notification>,
+                            { placement: 'topEnd' }
                           );
                           return;
+                        } else {
+                          const newChartData = getChartData(
+                            formValue.classes,
+                            formValue.observations
+                          );
+                          setChartData(newChartData);
+                          setTableData(getTableData(newChartData));
                         }
-                        const newChartData = getChartData(
-                          formValue.classes,
-                          formValue.observations
-                        );
-                        setChartData(newChartData);
-                        setTableData(getTableData(newChartData));
                       }}
                     >
                       Submit
@@ -217,7 +221,7 @@ const HistogramDashboard = () => {
           </Panel>
         </Col>
         <Col xs={8}>
-          <BarChart title="Histogram" data={chartData} type="bar" labels={chartData.labels} />
+          <BarChart title="Histogram" data={chartData} type="bar" labels={chartData?.labels} />
         </Col>
       </Row>
       <Row gutter={30}>
@@ -225,7 +229,12 @@ const HistogramDashboard = () => {
           <DataTable data={tableData} />
         </Col>
         <Col xs={8}>
-          <PieChart title="Pie Chart" data={chartData.data} type="pie" labels={chartData.labels} />
+          <PieChart
+            title="Pie Chart"
+            data={chartData?.data}
+            type="pie"
+            labels={chartData?.labels}
+          />
         </Col>
       </Row>
     </>
