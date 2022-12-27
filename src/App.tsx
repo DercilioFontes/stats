@@ -5,7 +5,7 @@ import { CustomProvider } from 'rsuite';
 import enUS from 'rsuite/locales/en_GB';
 import locales from './locales';
 import Frame from './components/Frame';
-import DashboardPage from './pages/dashboard';
+import HistogramPage from './pages/histogram';
 import Error404Page from './pages/authentication/404';
 import Error500Page from './pages/authentication/500';
 import { appNavs } from './config';
@@ -16,8 +16,8 @@ const App = () => {
       <CustomProvider locale={enUS}>
         <Routes>
           <Route path="/" element={<Frame navs={appNavs} />}>
-            <Route index element={<DashboardPage />} />
-            <Route path="histogram" element={<DashboardPage />} />
+            <Route index element={<HistogramPage />} />
+            <Route path="histogram" element={<HistogramPage />} />
             <Route path="error-404" element={<Error404Page />} />
             <Route path="error-500" element={<Error500Page />} />
           </Route>

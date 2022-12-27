@@ -106,7 +106,7 @@ const initFormValue = {
   observations: initialObservations.join('\n')
 };
 
-const Dashboard = () => {
+const HistogramDashboard = () => {
   const [formValue, setFormValue] = React.useState<Record<string, string>>(initFormValue);
   const [chartData, setChartData] = React.useState<ChartData | null>(
     getChartData(initFormValue.classes, initFormValue.observations)
@@ -194,7 +194,7 @@ const Dashboard = () => {
                       onClick={() => {
                         if (!formValue.classes || !formValue.observations) {
                           toaster.push(
-                            <Notification type="warning" header="warning" placement="topEnd">
+                            <Notification type="warning" header="warning">
                               No data!
                             </Notification>
                           );
@@ -232,4 +232,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default HistogramDashboard;
