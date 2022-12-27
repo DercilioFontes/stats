@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { CustomProvider } from 'rsuite';
-import enGB from 'rsuite/locales/en_GB';
+import enUS from 'rsuite/locales/en_GB';
 import locales from './locales';
 import Frame from './components/Frame';
 import DashboardPage from './pages/dashboard';
@@ -13,7 +13,7 @@ import { appNavs } from './config';
 const App = () => {
   return (
     <IntlProvider locale="en" messages={locales.en}>
-      <CustomProvider locale={enGB}>
+      <CustomProvider locale={enUS}>
         <Routes>
           <Route path="/" element={<Frame navs={appNavs} />}>
             <Route index element={<DashboardPage />} />

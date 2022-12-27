@@ -4,7 +4,6 @@ import { Panel, Stack } from 'rsuite';
 
 interface BarChartProps {
   title?: React.ReactNode;
-  actions?: React.ReactNode;
   data: any;
   type?:
     | 'line'
@@ -72,16 +71,8 @@ const defaultOptions: ApexCharts.ApexOptions = {
   }
 };
 
-const BarChart = ({ title, actions, data, type, labels, options }: BarChartProps) => (
-  <Panel
-    className="card"
-    header={
-      <Stack justifyContent="space-between">
-        {title}
-        {actions}
-      </Stack>
-    }
-  >
+const BarChart = ({ title, data, type, labels, options }: BarChartProps) => (
+  <Panel className="card" header={<Stack justifyContent="space-between">{title}</Stack>}>
     <Chart
       series={[data]}
       type={type}

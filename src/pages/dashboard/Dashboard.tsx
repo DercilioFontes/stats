@@ -7,13 +7,13 @@ import {
   Form,
   ButtonToolbar,
   Button,
-  Input,
   useToaster,
   Notification
 } from 'rsuite';
 import PieChart from './PieChart';
 import DataTable, { TableData } from './DataTable';
 import BarChart from './BarChart';
+import Textarea from '@/components/Textarea';
 
 type ChartData = {
   labels: string[];
@@ -100,10 +100,6 @@ const getTableData = (chartData: ChartData | null): TableData[] => {
     };
   });
 };
-
-const Textarea = React.forwardRef<HTMLTextAreaElement>((props, ref) => (
-  <Input {...props} as="textarea" ref={ref} />
-));
 
 const initFormValue = {
   classes: initialClasses.join('\n'),

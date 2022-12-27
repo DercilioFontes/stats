@@ -31,8 +31,8 @@
     "url": "git@github.com:rsuite/rsuite-admin-template.git"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.9",
-    "@faker-js/faker": "^7.4.0",
+    "@babel/runtime": "^7.20.7",
+    "@faker-js/faker": "^7.6.0",
     "@fullcalendar/daygrid": "^5.11.3",
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/react": "^5.11.2",
