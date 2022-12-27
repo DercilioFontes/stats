@@ -13,15 +13,17 @@ module.exports = {
   },
   devServer: {
     hot: true,
-    disableHostCheck: true,
+    allowedHosts: 'all',
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, ''),
-    publicPath: '/'
+    static: {
+      directory: path.resolve(__dirname, ''),
+      publicPath: '/'
+    }
   },
   output: {
     path: path.resolve(__dirname, 'assets'),
     filename: 'bundle.js',
-    publicPath: './'
+    publicPath: '/'
   },
 
   module: {
