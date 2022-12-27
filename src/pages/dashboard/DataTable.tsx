@@ -4,10 +4,10 @@ import { Table, Panel } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
 export type TableData = {
-  label: string;
-  frequency: number;
-  relativeFrequency: number;
-  cumulativeFrequency: number;
+  label: string | undefined;
+  frequency: number | undefined;
+  relativeFrequency: number | undefined;
+  cumulativeFrequency: number | undefined;
 };
 
 const DataTable = ({ data }: { data: TableData[] }) => {

@@ -1,5 +1,16 @@
 import React from 'react';
-import { Row, Col, Panel, Stack, Form, ButtonToolbar, Button, Input } from 'rsuite';
+import {
+  Row,
+  Col,
+  Panel,
+  Stack,
+  Form,
+  ButtonToolbar,
+  Button,
+  Input,
+  useToaster,
+  Notification
+} from 'rsuite';
 import PieChart from './PieChart';
 import DataTable, { TableData } from './DataTable';
 import BarChart from './BarChart';
@@ -11,7 +22,7 @@ type ChartData = {
   sum: number;
 };
 
-const classes = [
+const initialClasses = [
   '0 - 10',
   '11 - 20',
   '21 - 30',
@@ -23,16 +34,27 @@ const classes = [
   '81 - 90',
   '91 - 100'
 ];
-const observations = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
+const initialObservations = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
 
-const getChartData = (classesStr: string, observationsStr: string): ChartData => {
-  const classes = classesStr.split('\n');
-  const observations = observationsStr.split('\n').map(Number);
-  // Map of classe => [min, max, count]
-  const mapResult = new Map(classes.map(c => [c, [...c.split('-').map(Number), 0]]));
+const getChartData = (classesStr: string, observationsStr: string): ChartData | null => {
+  const classesMatches = classesStr.matchAll(/(\d+ *- *\d+)/g);
+  const observationsMatches = observationsStr.matchAll(/( *\d+ *)/g);
+  // Map of class => [min, max, count]
+  const classesMap = new Map<string, [number, number, number]>();
 
-  for (const o of observations) {
-    for (const values of mapResult.values()) {
+  for (const classMatch of classesMatches) {
+    const c = classMatch[0];
+    const [min, max] = c.split('-').map<number>(Number);
+    classesMap.set(c, [min, max, 0]);
+  }
+
+  if (classesMap.size === 0) {
+    return null;
+  }
+
+  for (const observationMatch of observationsMatches) {
+    const o = Number(observationMatch[0]);
+    for (const values of classesMap.values()) {
       const [min, max] = values;
       if (o >= min && o <= max) {
         values[2] += 1;
@@ -45,7 +67,7 @@ const getChartData = (classesStr: string, observationsStr: string): ChartData =>
   const cumulativeFrequencies: number[] = [];
   let sum = 0;
 
-  for (const [key, value] of mapResult.entries()) {
+  for (const [key, value] of classesMap.entries()) {
     labels.push(key);
     const count = value[2];
     data.push(count);
@@ -56,7 +78,17 @@ const getChartData = (classesStr: string, observationsStr: string): ChartData =>
   return { labels, data, cumulativeFrequencies, sum };
 };
 
-const getTableData = (chartData: ChartData) => {
+const getTableData = (chartData: ChartData | null): TableData[] => {
+  if (!chartData) {
+    return [
+      {
+        label: undefined,
+        frequency: undefined,
+        relativeFrequency: undefined,
+        cumulativeFrequency: undefined
+      }
+    ];
+  }
   return chartData.labels.map<TableData>((label, i) => {
     const frequency = chartData.data[i];
     const relativeFrequency = Number(((frequency / chartData.sum) * 100).toFixed(2));
@@ -74,16 +106,17 @@ const Textarea = React.forwardRef<HTMLTextAreaElement>((props, ref) => (
 ));
 
 const initFormValue = {
-  classes: classes.join('\n'),
-  observations: observations.join('\n')
+  classes: initialClasses.join('\n'),
+  observations: initialObservations.join('\n')
 };
 
 const Dashboard = () => {
   const [formValue, setFormValue] = React.useState<Record<string, string>>(initFormValue);
-  const [chartData, setChartData] = React.useState<ChartData>(
+  const [chartData, setChartData] = React.useState<ChartData | null>(
     getChartData(initFormValue.classes, initFormValue.observations)
   );
   const [tableData, setTableData] = React.useState(getTableData(chartData));
+  const toaster = useToaster();
 
   return (
     <>
@@ -139,11 +172,15 @@ const Dashboard = () => {
               >
                 <Form.Group controlId="textarea">
                   <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
-                  <Form.Control rows={classes.length} name="classes" accepter={Textarea} />
+                  <Form.Control rows={initialClasses.length} name="classes" accepter={Textarea} />
                 </Form.Group>
                 <Form.Group controlId="textarea">
                   <Form.ControlLabel>Observations (values)</Form.ControlLabel>
-                  <Form.Control rows={classes.length} name="observations" accepter={Textarea} />
+                  <Form.Control
+                    rows={initialClasses.length}
+                    name="observations"
+                    accepter={Textarea}
+                  />
                 </Form.Group>
                 <Form.Group>
                   <ButtonToolbar>
@@ -159,6 +196,14 @@ const Dashboard = () => {
                     <Button
                       appearance="primary"
                       onClick={() => {
+                        if (!formValue.classes || !formValue.observations) {
+                          toaster.push(
+                            <Notification type="warning" header="warning" placement="topEnd">
+                              No data!
+                            </Notification>
+                          );
+                          return;
+                        }
                         const newChartData = getChartData(
                           formValue.classes,
                           formValue.observations
