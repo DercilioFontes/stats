@@ -143,6 +143,11 @@ const HistogramDashboard = () => {
                 observations in each class relative to the total number of observations. The
                 percentages are called relative frequencies.
               </p>
+              <p>
+                The <strong>cumulative frequency distribution</strong> displays the number of
+                observations that are less than or equal to the current class. In other words, it
+                sums the frequency in the current class and the frequencies in the previous classes.
+              </p>
             </div>
           </Panel>
         </Col>
