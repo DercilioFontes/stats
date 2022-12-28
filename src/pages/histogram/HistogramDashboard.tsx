@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  Row,
-  Col,
-  Panel,
-  Stack,
-  Form,
-  ButtonToolbar,
-  Button,
-  useToaster,
-  Notification
-} from 'rsuite';
+import { Row, Col, Panel, Form, ButtonToolbar, Button, useToaster, Notification } from 'rsuite';
 import PieChart from '../../components/Charts/PieChart';
 import DataTable, { TableData } from '../../components/Table/DataTable';
 import BarChart from '../../components/Charts/BarChart';
 import Textarea from '@/components/Textarea';
+import InfoPopover from '@/components/InfoPopover';
 
 type ChartData = {
   labels: string[];
@@ -38,7 +29,7 @@ const initialObservations = Array.from({ length: 40 }, () => Math.floor(Math.ran
 
 const getChartData = (classesStr: string, observationsStr: string): ChartData | null => {
   const classesMatches = classesStr.matchAll(/(\d+ *- *\d+)/g);
-  const observationsMatches = observationsStr.matchAll(/( *\d+ *)/g);
+  const observationsMatches = observationsStr.matchAll(/( *\d+\.?\d* *)/g);
   // Map of class => [min, max, count]
   const classesMap = new Map<string, [number, number, number]>();
 
@@ -159,7 +150,40 @@ const HistogramDashboard = () => {
 
       <Row gutter={30}>
         <Col xs={16}>
-          <Panel className="card" header={<Stack justifyContent="space-between">Data</Stack>}>
+          <Panel
+            className="card"
+            header={
+              <>
+                Data
+                <InfoPopover
+                  title="Adding data"
+                  content={
+                    <ul>
+                      <li>Use any delimiter between the values, except a decimal separator (.)</li>
+                      <li>
+                        For the classes, use a dash (-) to define the intervals and don&apos;t
+                        overlap them
+                      </li>
+                      <li>
+                        Example:
+                        <pre>
+                          Classes: 10-20, 21 - 30; 31- 40
+                          <br /> 51 - 60
+                          <br /> 61-70
+                        </pre>
+                        <pre>
+                          Observations: 13, 23; 35
+                          <br /> 41
+                          <br /> 45
+                        </pre>
+                      </li>
+                      <li>You can copy and paste from a spreadsheeet like Excel</li>
+                    </ul>
+                  }
+                />
+              </>
+            }
+          >
             <Col>
               <Form
                 layout="inline"
