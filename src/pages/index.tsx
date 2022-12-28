@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from 'rsuite';
-import HistogramDashboard from './Dashboard';
+import HistogramDashboard from './histogram/HistogramDashboard';
 import Copyright from '@/components/Copyright';
 
 const Page = () => {

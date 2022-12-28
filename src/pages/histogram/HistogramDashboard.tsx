@@ -10,9 +10,9 @@ import {
   useToaster,
   Notification
 } from 'rsuite';
-import PieChart from './PieChart';
-import DataTable, { TableData } from './DataTable';
-import BarChart from './BarChart';
+import PieChart from '../../components/Charts/PieChart';
+import DataTable, { TableData } from '../../components/Table/DataTable';
+import BarChart from '../../components/Charts/BarChart';
 import Textarea from '@/components/Textarea';
 
 type ChartData = {
