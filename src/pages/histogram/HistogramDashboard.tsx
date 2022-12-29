@@ -111,8 +111,18 @@ const HistogramDashboard = () => {
         <Col xs={8}>
           <Panel className="trend-box bg-gradient-red">
             <div className="title">
-              A <strong>histogram</strong> is a bar graph showing the number of observations in each
-              class as the height of each bar.
+              <p>
+                A <strong>histogram</strong> is an approximate representation of the distribution of
+                numerical data. The term was first introduced by Karl Pearson.
+              </p>
+              <p>
+                Histograms are sometimes confused with bar charts. A histogram is used for
+                continuous data, where the bins represent ranges of data, while a bar chart is a
+                plot of categorical variables. Some authors recommend that bar charts have gaps
+                between the rectangles to clarify the distinction.
+                <br />
+                <cite>(Wikipedia contributors, 2022)</cite>
+              </p>
             </div>
           </Panel>
         </Col>
@@ -120,12 +130,20 @@ const HistogramDashboard = () => {
           <Panel className="trend-box bg-gradient-green">
             <div className="title">
               <p>
-                Organizing and presenting data sets can take three main forms: frequency
-                distributions, graphs, and stem and leaf designs.
+                To construct a histogram, the first step is to &ldquo;bin&rdquo; (or
+                &ldquo;bucket&rdquo;) the range of values—that is, divide the entire range of values
+                into a series of intervals—and then count how many values fall into each interval.
+                The bins are usually specified as consecutive, non-overlapping intervals of a
+                variable. The bins (intervals) must be adjacent and are often (but not required to
+                be) of equal size.
+                <br />
+                <cite>(Wikipedia contributors, 2022)</cite>
               </p>
               <p>
                 The intervals in the frequency distribution are known as classes, and the number of
                 observations in each class is known as frequency.
+                <br />
+                <cite>(Donnelly and Abdel-Raouf, 2016)</cite>
               </p>
             </div>
           </Panel>
@@ -147,6 +165,8 @@ const HistogramDashboard = () => {
                 The <strong>cumulative frequency distribution</strong> displays the number of
                 observations that are less than or equal to the current class. In other words, it
                 sums the frequency in the current class and the frequencies in the previous classes.
+                <br />
+                <cite>(Donnelly and Abdel-Raouf, 2016)</cite>
               </p>
             </div>
           </Panel>

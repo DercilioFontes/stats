@@ -6,16 +6,22 @@ const Info = () => {
   return (
     <>
       <section>
-        <h6>Reference</h6>
+        <h6>References</h6>
         <ol>
           <li>
-            Bob Donnelly Jr., PhD and Fatma Abdel-Raouf, PhD.{' '}
+            Robert A. Donnelly, Jr., Ph.D. and Fatma Abdel-Raouf, Ph.D.{' '}
             <i>Statistics, 3E (Idiot&apos;s Guides)</i>. 3rd ed. Alpha, 2016{' '}
             <a
               href="https://www.dk.com/ca/book/9781465451668-statistics-3e/"
               target="_blank"
               rel="noreferrer"
             >
+              <Icon as={RxExternalLink} />
+            </a>
+          </li>
+          <li>
+            Wikipedia contributors. (2022, October 4). <i>Histogram</i>. Wikipedia.{' '}
+            <a href="https://en.wikipedia.org/wiki/Histogram" target="_blank" rel="noreferrer">
               <Icon as={RxExternalLink} />
             </a>
           </li>
@@ -66,7 +72,7 @@ const Info = () => {
           .
         </p>
       </section>
-      <section>
+      <section className="license">
         <h6>License</h6>
         <details>
           <summary>MIT</summary>
