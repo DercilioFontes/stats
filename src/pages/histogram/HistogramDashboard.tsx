@@ -281,7 +281,7 @@ const HistogramDashboard = () => {
         </Col>
       </Row>
       <Row gutter={30}>
-        <Col lg={16}>
+        <Col xs={24} lg={16}>
           <DataTable data={tableData} />
         </Col>
         <Col lg={8}>

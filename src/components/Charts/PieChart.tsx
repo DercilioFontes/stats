@@ -1,6 +1,9 @@
+import { SM_BREAKPOINT } from '@/constants';
 import React from 'react';
 import Chart from 'react-apexcharts';
-import { Panel } from 'rsuite';
+import { DOMHelper, Panel } from 'rsuite';
+
+const { getWidth } = DOMHelper;
 
 interface PieChartProps {
   title: string;
@@ -62,7 +65,7 @@ const defaultOptions: ApexCharts.ApexOptions = {
     '#13cdef'
   ],
   legend: {
-    position: 'right'
+    position: getWidth(window) > SM_BREAKPOINT ? 'right' : 'bottom'
   }
 };
 
