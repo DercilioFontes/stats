@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQFNVSZ1J0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-SQFNVSZ1J0');
+    </script>
     <meta charset="UTF-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,7 +42,7 @@
         '_ha'
       );
       _ha('create', '5156', {
-        auto_track: true
+        auto_track: true,
       });
       _ha('send', 'pageview');
     </script>
