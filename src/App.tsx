@@ -5,10 +5,11 @@ import { CustomProvider } from 'rsuite';
 import enUS from 'rsuite/locales/en_GB';
 import locales from './locales';
 import Frame from './components/Frame';
-import HistogramPage from './pages';
+import HistogramPage from './pages/histogram';
 import Error404Page from './pages/authentication/404';
 import Error500Page from './pages/authentication/500';
 import { appNavs } from './config';
+import Info from './pages/info';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" element={<Frame navs={appNavs} />}>
             <Route index element={<HistogramPage />} />
             <Route path="histogram" element={<HistogramPage />} />
+            <Route path="info" element={<Info />} />
             <Route path="error-404" element={<Error404Page />} />
             <Route path="error-500" element={<Error500Page />} />
           </Route>

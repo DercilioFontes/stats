@@ -16,8 +16,9 @@
   "keywords": [
     "react",
     "rsuite",
-    "admin",
-    "template"
+    "stats",
+    "calculator",
+    "chart"
   ],
   "files": [
     "CHANGELOG.md",

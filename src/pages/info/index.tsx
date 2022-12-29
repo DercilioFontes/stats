@@ -1,12 +1,12 @@
 import React from 'react';
 import { Panel } from 'rsuite';
-import HistogramDashboard from './histogram/HistogramDashboard';
+import Info from './Info';
 import Copyright from '@/components/Copyright';
 
 const Page = () => {
   return (
-    <Panel header={<h3 className="title">Histogram</h3>}>
-      <HistogramDashboard />
+    <Panel header={<h3 className="title">Info</h3>}>
+      <Info />
       <Copyright />
     </Panel>
   );
