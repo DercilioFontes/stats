@@ -270,7 +270,12 @@ const HistogramDashboard = () => {
           </Panel>
         </Col>
         <Col xs={8}>
-          <BarChart title="Histogram" data={chartData} type="bar" labels={chartData?.labels} />
+          <BarChart
+            title="Histogram"
+            data={chartData}
+            type="histogram"
+            labels={chartData?.labels}
+          />
         </Col>
       </Row>
       <Row gutter={30}>
