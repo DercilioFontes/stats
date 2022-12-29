@@ -7,7 +7,7 @@ import Header from '../Header';
 import NavLink from '../NavLink';
 import Brand from '../Brand';
 
-const { getHeight, on } = DOMHelper;
+const { getHeight, getWidth, on } = DOMHelper;
 
 const NavItem = props => {
   const { title, eventKey, ...rest } = props;
@@ -32,9 +32,11 @@ export interface FrameProps {
   children?: React.ReactNode;
 }
 
+const SM_BREAKPOINT = 576;
+
 const Frame = (props: FrameProps) => {
   const { navs } = props;
-  const [expand, setExpand] = useState(true);
+  const [expand, setExpand] = useState(getWidth(window) > SM_BREAKPOINT);
   const [windowHeight, setWindowHeight] = useState(getHeight(window));
 
   useEffect(() => {
