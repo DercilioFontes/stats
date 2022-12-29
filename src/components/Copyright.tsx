@@ -1,14 +1,12 @@
 import React from 'react';
 import { Stack } from 'rsuite';
 
-const year = new Date().getFullYear();
-
 const Copyright = () => {
   return (
     <Stack className="copyright" justifyContent="center" style={{ height: 40, marginTop: 20 }}>
       <div className="container">
         <p>
-          © {year}, Made with ❤️ by{' '}
+          © 2022, Made with ❤️ by{' '}
           <a href="https://www.linkedin.com/in/derciliofontes/" target="_blank" rel="noreferrer">
             Dercilio Fontes
           </a>{' '}
