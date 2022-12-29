@@ -59,7 +59,7 @@ const Info = () => {
       <section>
         <h6>Issues</h6>
         <p>
-          If you find any issues or want to give any suggestion, you can add it{' '}
+          If you find any issue or want to give any suggestion, you can add it{' '}
           <a href="https://github.com/DercilioFontes/stats/issues" target="_blank" rel="noreferrer">
             here
           </a>
