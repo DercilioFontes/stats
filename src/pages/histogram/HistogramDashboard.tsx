@@ -108,7 +108,7 @@ const HistogramDashboard = () => {
   return (
     <>
       <Row gutter={30} className="dashboard-header">
-        <Col xs={18} lg={8}>
+        <Col lg={8}>
           <Panel className="trend-box bg-gradient-red">
             <div className="title">
               <p>
@@ -126,7 +126,7 @@ const HistogramDashboard = () => {
             </div>
           </Panel>
         </Col>
-        <Col xs={18} lg={8}>
+        <Col lg={8}>
           <Panel className="trend-box bg-gradient-green">
             <div className="title">
               <p>
@@ -148,7 +148,7 @@ const HistogramDashboard = () => {
             </div>
           </Panel>
         </Col>
-        <Col xs={18} lg={8}>
+        <Col lg={8}>
           <Panel className="trend-box bg-gradient-blue">
             <div className="title">
               <p>
@@ -174,7 +174,7 @@ const HistogramDashboard = () => {
       </Row>
 
       <Row gutter={30}>
-        <Col xs={16}>
+        <Col lg={16}>
           <Panel
             className="card"
             header={
@@ -209,24 +209,26 @@ const HistogramDashboard = () => {
               </>
             }
           >
-            <Col>
-              <Form
-                layout="inline"
-                formValue={formValue}
-                onChange={formValue => setFormValue(formValue)}
-              >
-                <Form.Group controlId="textarea">
-                  <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
-                  <Form.Control rows={initialClasses.length} name="classes" accepter={Textarea} />
-                </Form.Group>
-                <Form.Group controlId="textarea">
-                  <Form.ControlLabel>Observations (values)</Form.ControlLabel>
-                  <Form.Control
-                    rows={initialClasses.length}
-                    name="observations"
-                    accepter={Textarea}
-                  />
-                </Form.Group>
+            <Form formValue={formValue} onChange={formValue => setFormValue(formValue)}>
+              <Row>
+                <Col lg={12} style={{ marginTop: 8 }}>
+                  <Form.Group controlId="classes">
+                    <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
+                    <Form.Control rows={initialClasses.length} name="classes" accepter={Textarea} />
+                  </Form.Group>
+                </Col>
+                <Col lg={12} style={{ marginTop: 8 }}>
+                  <Form.Group controlId="observations">
+                    <Form.ControlLabel>Observations (values)</Form.ControlLabel>
+                    <Form.Control
+                      rows={initialClasses.length}
+                      name="observations"
+                      accepter={Textarea}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row style={{ marginTop: 16 }}>
                 <Form.Group>
                   <ButtonToolbar>
                     <Button
@@ -265,11 +267,11 @@ const HistogramDashboard = () => {
                     </Button>
                   </ButtonToolbar>
                 </Form.Group>
-              </Form>
-            </Col>
+              </Row>
+            </Form>
           </Panel>
         </Col>
-        <Col xs={8}>
+        <Col lg={8}>
           <BarChart
             title="Histogram"
             data={chartData}
@@ -279,10 +281,10 @@ const HistogramDashboard = () => {
         </Col>
       </Row>
       <Row gutter={30}>
-        <Col xs={16}>
+        <Col lg={16}>
           <DataTable data={tableData} />
         </Col>
-        <Col xs={8}>
+        <Col lg={8}>
           <PieChart
             title="Pie Chart"
             data={chartData?.data}

@@ -6,6 +6,7 @@ import NavToggle from './NavToggle';
 import Header from '../Header';
 import NavLink from '../NavLink';
 import Brand from '../Brand';
+import { SM_BREAKPOINT } from '@/constants';
 
 const { getHeight, getWidth, on } = DOMHelper;
 
@@ -31,8 +32,6 @@ export interface FrameProps {
   navs: NavItemData[];
   children?: React.ReactNode;
 }
-
-const SM_BREAKPOINT = 576;
 
 const Frame = (props: FrameProps) => {
   const { navs } = props;
