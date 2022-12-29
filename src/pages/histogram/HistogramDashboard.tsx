@@ -108,7 +108,7 @@ const HistogramDashboard = () => {
   return (
     <>
       <Row gutter={30} className="dashboard-header">
-        <Col xs={8}>
+        <Col xs={18} lg={8}>
           <Panel className="trend-box bg-gradient-red">
             <div className="title">
               <p>
@@ -126,7 +126,7 @@ const HistogramDashboard = () => {
             </div>
           </Panel>
         </Col>
-        <Col xs={8}>
+        <Col xs={18} lg={8}>
           <Panel className="trend-box bg-gradient-green">
             <div className="title">
               <p>
@@ -148,7 +148,7 @@ const HistogramDashboard = () => {
             </div>
           </Panel>
         </Col>
-        <Col xs={8}>
+        <Col xs={18} lg={8}>
           <Panel className="trend-box bg-gradient-blue">
             <div className="title">
               <p>
