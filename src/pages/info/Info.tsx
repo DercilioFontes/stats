@@ -56,6 +56,16 @@ const Info = () => {
           </li>
         </ol>
       </section>
+      <section>
+        <h6>Issues</h6>
+        <p>
+          If you find any issues or want to give any suggestion, you can add it{' '}
+          <a href="https://github.com/DercilioFontes/stats/issues" target="_blank" rel="noreferrer">
+            here
+          </a>
+          .
+        </p>
+      </section>
     </>
   );
 };
