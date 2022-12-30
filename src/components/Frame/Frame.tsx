@@ -91,9 +91,9 @@ const Frame = (props: FrameProps) => {
                 return <NavItem key={rest.eventKey} {...rest} />;
               })}
             </Nav>
+          <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
           </Sidenav.Body>
         </Sidenav>
-        <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
       </Sidebar>
 
       <Container className={containerClasses}>
