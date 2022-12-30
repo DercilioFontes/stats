@@ -19,7 +19,7 @@ const NavItem = props => {
   );
 };
 
-export interface NavItemData {
+interface NavItemData {
   eventKey: string;
   title: string;
   icon?: any;
@@ -28,7 +28,7 @@ export interface NavItemData {
   children?: NavItemData[];
 }
 
-export interface FrameProps {
+interface FrameProps {
   navs: NavItemData[];
   children?: React.ReactNode;
 }
@@ -91,7 +91,7 @@ const Frame = (props: FrameProps) => {
                 return <NavItem key={rest.eventKey} {...rest} />;
               })}
             </Nav>
-          <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
+            <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
           </Sidenav.Body>
         </Sidenav>
       </Sidebar>
