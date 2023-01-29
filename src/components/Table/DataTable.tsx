@@ -35,7 +35,7 @@ const DataTable = ({ data }: { data: TableData[] }) => {
       }
     >
       <Table height={300} data={data} rowKey="label">
-        <Column flexGrow={1} minWidth={100}>
+        <Column flexGrow={1} fixed="left" minWidth={100}>
           <HeaderCell className="table-header">Classes</HeaderCell>
           <Cell dataKey="label"></Cell>
         </Column>

@@ -1,0 +1,1 @@
+export const SM_BREAKPOINT = 576;

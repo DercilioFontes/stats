@@ -6,8 +6,9 @@ import NavToggle from './NavToggle';
 import Header from '../Header';
 import NavLink from '../NavLink';
 import Brand from '../Brand';
+import { SM_BREAKPOINT } from '@/constants';
 
-const { getHeight, on } = DOMHelper;
+const { getHeight, getWidth, on } = DOMHelper;
 
 const NavItem = props => {
   const { title, eventKey, ...rest } = props;
@@ -18,7 +19,7 @@ const NavItem = props => {
   );
 };
 
-export interface NavItemData {
+interface NavItemData {
   eventKey: string;
   title: string;
   icon?: any;
@@ -27,14 +28,14 @@ export interface NavItemData {
   children?: NavItemData[];
 }
 
-export interface FrameProps {
+interface FrameProps {
   navs: NavItemData[];
   children?: React.ReactNode;
 }
 
 const Frame = (props: FrameProps) => {
   const { navs } = props;
-  const [expand, setExpand] = useState(true);
+  const [expand, setExpand] = useState(getWidth(window) > SM_BREAKPOINT);
   const [windowHeight, setWindowHeight] = useState(getHeight(window));
 
   useEffect(() => {
@@ -90,9 +91,9 @@ const Frame = (props: FrameProps) => {
                 return <NavItem key={rest.eventKey} {...rest} />;
               })}
             </Nav>
+            <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
           </Sidenav.Body>
         </Sidenav>
-        <NavToggle expand={expand} onChange={() => setExpand(!expand)} />
       </Sidebar>
 
       <Container className={containerClasses}>
