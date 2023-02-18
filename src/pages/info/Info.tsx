@@ -25,6 +25,12 @@ const Info = () => {
               <Icon as={RxExternalLink} />
             </a>
           </li>
+          <li>
+            Wikipedia contributors. (2023, February 18). <i>Bar chart</i>. Wikipedia.{' '}
+            <a href="https://en.wikipedia.org/wiki/Bar_chart" target="_blank" rel="noreferrer">
+              <Icon as={RxExternalLink} />
+            </a>
+          </li>
         </ol>
       </section>
       <section>

@@ -112,16 +112,13 @@ const BarChartDashboard = () => {
           <Panel className="trend-box bg-gradient-red">
             <div className="title">
               <p>
-                A <strong>histogram</strong> is an approximate representation of the distribution of
-                numerical data. The term was first introduced by Karl Pearson.
-              </p>
-              <p>
-                Histograms are sometimes confused with bar charts. A histogram is used for
-                continuous data, where the bins represent ranges of data, while a bar chart is a
-                plot of categorical variables. Some authors recommend that bar charts have gaps
-                between the rectangles to clarify the distinction.
+                A <strong>bar chart</strong> or <strong>bar graph</strong> is a chart or graph that
+                presents categorical data with rectangular bars with heights or lengths proportional
+                to the values that they represent. The bars can be plotted vertically or
+                horizontally. A vertical bar chart is sometimes called a
+                <strong>column chart</strong>.
                 <br />
-                <cite>(Wikipedia contributors, 2022)</cite>
+                <cite>(Wikipedia contributors, 2023)</cite>
               </p>
             </div>
           </Panel>
@@ -130,20 +127,13 @@ const BarChartDashboard = () => {
           <Panel className="trend-box bg-gradient-green">
             <div className="title">
               <p>
-                To construct a histogram, the first step is to &ldquo;bin&rdquo; (or
-                &ldquo;bucket&rdquo;) the range of values—that is, divide the entire range of values
-                into a series of intervals—and then count how many values fall into each interval.
-                The bins are usually specified as consecutive, non-overlapping intervals of a
-                variable. The bins (intervals) must be adjacent and are often (but not required to
-                be) of equal size.
+                Bar graphs/charts provide a visual presentation of categorical data. Categorical
+                data is a grouping of data into discrete groups, such as months of the year, age
+                group, shoe sizes, and animals. These categories are usually qualitative. In a
+                column (vertical) bar chart, categories appear along the horizontal axis and the
+                height of the bar corresponds to the value of each category.
                 <br />
-                <cite>(Wikipedia contributors, 2022)</cite>
-              </p>
-              <p>
-                The intervals in the frequency distribution are known as classes, and the number of
-                observations in each class is known as frequency.
-                <br />
-                <cite>(Donnelly and Abdel-Raouf, 2016)</cite>
+                <cite>(Wikipedia contributors, 2023)</cite>
               </p>
             </div>
           </Panel>
@@ -152,22 +142,20 @@ const BarChartDashboard = () => {
           <Panel className="trend-box bg-gradient-blue">
             <div className="title">
               <p>
-                A <strong>frequency distribution</strong> is a table with two columns: One column
-                has the classes for the variable of interest and the second column has the frequency
-                in each class.
+                What is the difference between a histogram and a bar chart? There are two main
+                differences:
               </p>
               <p>
-                <strong>Relative frequency distributions</strong> display the percentage of
-                observations in each class relative to the total number of observations. The
-                percentages are called relative frequencies.
+                1. For the histogram, you have to present the classes on the horizontal axis and the
+                frequency on the vertical axis, whereas for the bar chart, you can present any
+                variable on the axes.
               </p>
               <p>
-                The <strong>cumulative frequency distribution</strong> displays the number of
-                observations that are less than or equal to the current class. In other words, it
-                sums the frequency in the current class and the frequencies in the previous classes.
-                <br />
-                <cite>(Donnelly and Abdel-Raouf, 2016)</cite>
+                2. The histogram has no gaps between the bars, whereas the bar chart does have gaps
+                between the bars. Also, in the bar chart, bars can be represented vertically or
+                horizontally.
               </p>
+              <cite>(Donnelly and Abdel-Raouf, 2016)</cite>
             </div>
           </Panel>
         </Col>
