@@ -11,10 +11,8 @@ const InfoPopover = ({ title, content }: { title: string; content: ReactNode }) 
       controlId={`control-id-right`}
       speaker={<Popover title={title}>{content}</Popover>}
     >
-      <Button appearance="subtle" style={{ padding: 1 }}>
-        <sup>
-          <Icon style={{ color: 'var(--rs-btn-primary-bg)', fontSize: 18 }} as={MdOutlineInfo} />
-        </sup>
+      <Button appearance="subtle" style={{ padding: 2, verticalAlign: 'middle' }}>
+        <Icon style={{ color: 'var(--rs-btn-primary-bg)', fontSize: 18 }} as={MdOutlineInfo} />
       </Button>
     </Whisper>
   );
