@@ -1,72 +1,49 @@
 import React from 'react';
 import { Row, Col, Panel, Form, ButtonToolbar, Button, useToaster, Notification } from 'rsuite';
-import PieChart from '../../components/Charts/PieChart';
-import DataTable, { TableData } from '../../components/Table/DataTable';
 import BarChart from '../../components/Charts/BarChart';
 import Textarea from '@/components/Textarea';
 import InfoPopover from '@/components/InfoPopover';
+import DataTable, { TableData } from './DataTable';
 
 type ChartData = {
   labels: string[];
   data: number[];
-  cumulativeFrequencies: number[];
-  sum: number;
 };
 
-const initialClasses = [
-  '0 - 10',
-  '11 - 20',
-  '21 - 30',
-  '31 - 40',
-  '41 - 50',
-  '51 - 60',
-  '61 - 70',
-  '71 - 80',
-  '81 - 90',
-  '91 - 100'
+const initialCategories = [
+  'Russia',
+  'Canada',
+  'China',
+  'United States',
+  'Brazil',
+  'Australia',
+  'India',
+  'Argentina',
+  'Kazakhstan',
+  'Algeria'
 ];
-const initialObservations = Array.from({ length: 40 }, () => Math.floor(Math.random() * 100));
+const initialObservations = [
+  17_098_242, 9_984_670, 9_706_961, 9_372_610, 8_515_767, 7_692_024, 3_287_590, 2_780_400,
+  2_724_900, 2_381_741
+];
 
-const getChartData = (classesStr: string, observationsStr: string): ChartData | null => {
-  const classesMatches = classesStr.matchAll(/(\d+ *- *\d+)/g);
-  const observationsMatches = observationsStr.matchAll(/( *\d+\.?\d* *)/g);
-  // Map of class => [min, max, count]
-  const classesMap = new Map<string, [number, number, number]>();
+const getChartData = (categoriesStr: string, observationsStr: string): ChartData | null => {
+  const categoriesMatches = categoriesStr.matchAll(/(.+)[\n|,|;]?/g);
+  const observationsMatches = observationsStr.matchAll(/( *\d+\.?\d* *)/gu);
+  const labels: string[] = [];
+  const data: number[] = [];
 
-  for (const classMatch of classesMatches) {
-    const c = classMatch[0];
-    const [min, max] = c.split('-').map<number>(Number);
-    classesMap.set(c, [min, max, 0]);
-  }
-
-  if (classesMap.size === 0) {
-    return null;
+  for (const categoryMatch of categoriesMatches) {
+    const c = categoryMatch[1];
+    labels.push(c);
   }
 
   for (const observationMatch of observationsMatches) {
     const o = Number(observationMatch[0]);
-    for (const values of classesMap.values()) {
-      const [min, max] = values;
-      if (o >= min && o <= max) {
-        values[2] += 1;
-      }
-    }
+    data.push(o);
   }
 
-  const labels: string[] = [];
-  const data: number[] = [];
-  const cumulativeFrequencies: number[] = [];
-  let sum = 0;
-
-  for (const [key, value] of classesMap.entries()) {
-    labels.push(key);
-    const count = value[2];
-    data.push(count);
-    sum += count;
-    cumulativeFrequencies.push(sum);
-  }
-
-  return { labels, data, cumulativeFrequencies, sum };
+  return { labels, data };
 };
 
 const getTableData = (chartData: ChartData | null): TableData[] => {
@@ -74,26 +51,21 @@ const getTableData = (chartData: ChartData | null): TableData[] => {
     return [
       {
         label: undefined,
-        frequency: undefined,
-        relativeFrequency: undefined,
-        cumulativeFrequency: undefined
+        value: undefined
       }
     ];
   }
   return chartData.labels.map<TableData>((label, i) => {
-    const frequency = chartData.data[i];
-    const relativeFrequency = Number(((frequency / chartData.sum) * 100).toFixed(2));
+    const value = chartData.data[i];
     return {
       label,
-      frequency,
-      relativeFrequency,
-      cumulativeFrequency: chartData.cumulativeFrequencies[i]
+      value
     };
   });
 };
 
 const initFormValue = {
-  classes: initialClasses.join('\n'),
+  classes: initialCategories.join('\n'),
   observations: initialObservations.join('\n')
 };
 
@@ -172,21 +144,24 @@ const BarChartDashboard = () => {
                   title="Adding data"
                   content={
                     <ul>
-                      <li>Use any delimiter between the values, except a decimal separator (.)</li>
                       <li>
-                        For the classes, use a dash (-) to define the intervals and don&apos;t
-                        overlap them
+                        For categories, use new line, comma (,) or semicolon (;) as delimiter
+                        between the values
+                      </li>
+                      <li>
+                        For observations, use any delimiter between the values, except a decimal
+                        separator (.)
                       </li>
                       <li>
                         Example:
                         <pre>
-                          Classes: 10-20, 21 - 30; 31- 40
-                          <br /> 51 - 60
-                          <br /> 61-70
+                          Category: Brazil, Canada; Germany
+                          <br /> Netherlands
+                          <br /> USA
                         </pre>
                         <pre>
-                          Observations: 13, 23; 35
-                          <br /> 41
+                          Observations: 13, 2.3; 35
+                          <br /> 4.1
                           <br /> 45
                         </pre>
                       </li>
@@ -201,18 +176,14 @@ const BarChartDashboard = () => {
               <Row>
                 <Col lg={12} style={{ marginTop: 8 }}>
                   <Form.Group controlId="classes">
-                    <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
-                    <Form.Control rows={initialClasses.length} name="classes" accepter={Textarea} />
+                    <Form.ControlLabel>Categories (labels)</Form.ControlLabel>
+                    <Form.Control name="classes" accepter={Textarea} />
                   </Form.Group>
                 </Col>
                 <Col lg={12} style={{ marginTop: 8 }}>
                   <Form.Group controlId="observations">
                     <Form.ControlLabel>Observations (values)</Form.ControlLabel>
-                    <Form.Control
-                      rows={initialClasses.length}
-                      name="observations"
-                      accepter={Textarea}
-                    />
+                    <Form.Control name="observations" accepter={Textarea} />
                   </Form.Group>
                 </Col>
               </Row>
@@ -261,24 +232,17 @@ const BarChartDashboard = () => {
         </Col>
         <Col lg={8}>
           <BarChart
-            title="Histogram"
+            title="Bar chart"
             data={chartData}
-            type="histogram"
+            type="bar"
             labels={chartData?.labels}
+            options={{ dataLabels: { enabled: false } }}
           />
         </Col>
       </Row>
       <Row gutter={30}>
         <Col xs={24} lg={16}>
           <DataTable data={tableData} />
-        </Col>
-        <Col lg={8}>
-          <PieChart
-            title="Pie Chart"
-            data={chartData?.data}
-            type="pie"
-            labels={chartData?.labels}
-          />
         </Col>
       </Row>
     </>
