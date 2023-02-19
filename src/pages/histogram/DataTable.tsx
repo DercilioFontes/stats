@@ -28,7 +28,7 @@ const DataTable = ({ data }: { data: TableData[] }) => {
       header={
         <Stack justifyContent="space-between">
           Table
-          <CSVLink filename="frequencies" title="Download CSV file" data={getCsv(data)}>
+          <CSVLink filename="histogram-table" title="Download CSV file" data={getCsv(data)}>
             <Icon style={{ color: '#6e8192' }} as={FaFileDownload} />
           </CSVLink>
         </Stack>

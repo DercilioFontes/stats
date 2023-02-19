@@ -205,9 +205,7 @@ const BarChartDashboard = () => {
                         if (!formValue.classes || !formValue.observations) {
                           toaster.push(
                             <Notification type="warning" header="warning">
-                              <p>
-                                No data! Please, add the classes intervals and observation values.
-                              </p>
+                              <p>No data! Please, add the categories and observation values.</p>
                             </Notification>,
                             { placement: 'topEnd' }
                           );

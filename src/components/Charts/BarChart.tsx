@@ -65,7 +65,19 @@ const defaultOptions: ApexCharts.ApexOptions = {
       padding: 4
     }
   },
-  colors: ['#206bc4', '#79a6dc', '#bfe399'],
+  colors: [
+    '#206bc4',
+    '#52e7a7',
+    '#ffbc4c',
+    '#ff677a',
+    '#8d78d7',
+    '#708590',
+    '#55b4aa',
+    '#d945ec',
+    '#79a6dc',
+    '#bfe399',
+    '#61a5e7'
+  ],
   legend: {
     show: false
   }
