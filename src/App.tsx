@@ -6,6 +6,7 @@ import enUS from 'rsuite/locales/en_US';
 import locales from './locales';
 import Frame from './components/Frame';
 import HistogramPage from './pages/histogram';
+import BarChartPage from './pages/bar-chart';
 import Error404Page from './pages/404';
 import { appNavs } from './config';
 import Info from './pages/info';
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" element={<Frame navs={appNavs} />}>
             <Route index element={<Navigate to="/histogram" />} />
             <Route path="histogram" element={<HistogramPage />} />
+            <Route path="bar-chart" element={<BarChartPage />} />
             <Route path="info" element={<Info />} />
           </Route>
           <Route path="*" element={<Error404Page />} />

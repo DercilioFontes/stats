@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Panel, Form, ButtonToolbar, Button, useToaster, Notification } from 'rsuite';
 import PieChart from '../../components/Charts/PieChart';
-import DataTable, { TableData } from '../../components/Table/DataTable';
+import DataTable, { TableData } from './DataTable';
 import BarChart from '../../components/Charts/BarChart';
 import Textarea from '@/components/Textarea';
 import InfoPopover from '@/components/InfoPopover';
@@ -214,17 +214,13 @@ const HistogramDashboard = () => {
                 <Col lg={12} style={{ marginTop: 8 }}>
                   <Form.Group controlId="classes">
                     <Form.ControlLabel>Classes (intervals)</Form.ControlLabel>
-                    <Form.Control rows={initialClasses.length} name="classes" accepter={Textarea} />
+                    <Form.Control name="classes" accepter={Textarea} />
                   </Form.Group>
                 </Col>
                 <Col lg={12} style={{ marginTop: 8 }}>
                   <Form.Group controlId="observations">
                     <Form.ControlLabel>Observations (values)</Form.ControlLabel>
-                    <Form.Control
-                      rows={initialClasses.length}
-                      name="observations"
-                      accepter={Textarea}
-                    />
+                    <Form.Control name="observations" accepter={Textarea} />
                   </Form.Group>
                 </Col>
               </Row>
@@ -275,8 +271,15 @@ const HistogramDashboard = () => {
           <BarChart
             title="Histogram"
             data={chartData}
-            type="histogram"
+            type="bar"
             labels={chartData?.labels}
+            options={{
+              plotOptions: {
+                bar: {
+                  columnWidth: '100%'
+                }
+              }
+            }}
           />
         </Col>
       </Row>
